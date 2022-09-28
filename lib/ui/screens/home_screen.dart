@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/ui/widgets/animated/animated_widgets.dart';
+import 'package:weather_app/ui/widgets/style/style.dart';
 
 const String homeScreenRoute = "/";
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  final Color weatherColorStart = Colors.amber.shade800;
-  final Color weatherColorCenter = Colors.amber.shade500;
-  final Color weatherColorEnd = Colors.amber.shade300;
+  final Color weatherColorStart = Colors.blue.shade800;
+  final Color weatherColorCenter = Colors.blue.shade500;
+  final Color weatherColorEnd = Colors.blue.shade300;
 
   final bool searching = true;
 
@@ -21,14 +22,10 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: searching
-            ? const BlinkingContainer(
+            ? BlinkingContainer(
                 child: Text(
                   'Loading ...',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyles.titleLarge(context),
                 ),
               )
             : Container(),
@@ -54,25 +51,12 @@ class HomeScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(
-              'Orizaba',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize:
-                    Theme.of(context).textTheme.displayMedium?.fontSize ?? 45,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text('Orizaba', style: TextStyles.displayMedium(context)),
             const SizedBox(height: 5),
             Text(
               'Tuesday, 27 September 2022',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize:
-                    Theme.of(context).textTheme.headlineSmall?.fontSize ?? 24,
-                fontWeight: FontWeight.normal,
-              ),
+              style: TextStyles.headlineSmall(context),
             ),
             Expanded(
               child: Column(
@@ -83,16 +67,7 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.white,
                     size: MediaQuery.of(context).size.width / 2,
                   ),
-                  Text(
-                    'Cloudy',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize:
-                          Theme.of(context).textTheme.headlineLarge?.fontSize ??
-                              32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text('Cloudy', style: TextStyles.headlineLarge(context)),
                 ],
               ),
             ),
@@ -110,78 +85,25 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Temperature',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.fontSize ??
-                                16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: TextStyles.titleMedium(context),
                         ),
                       ),
-                      Text(
-                        'More',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Theme
-                              .of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.fontSize ??
-                              14,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
+                      Text('More', style: TextStyles.titleSmall(context)),
                       SizedBox(width: 10),
                       Icon(
                         Icons.arrow_forward_rounded,
                         color: Colors.white,
                         size: 20,
                       ),
-                      ],
+                    ],
                   ),
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Min: 18°',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.fontSize ??
-                              22,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      Text(
-                        '20°',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Theme.of(context)
-                                  .textTheme
-                                  .headlineLarge
-                                  ?.fontSize ??
-                              32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'Max: 25°',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge
-                                  ?.fontSize ??
-                              22,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
+                      Text('Min: 18°', style: TextStyles.titleLarge(context)),
+                      Text('20°', style: TextStyles.headlineLarge(context)),
+                      Text('Max: 25°', style: TextStyles.titleLarge(context)),
                     ],
                   ),
                 ],
