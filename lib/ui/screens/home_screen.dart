@@ -9,10 +9,6 @@ const String homeScreenRoute = "/";
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  final Color weatherColorStart = Colors.blue.shade800;
-  final Color weatherColorCenter = Colors.blue.shade500;
-  final Color weatherColorEnd = Colors.blue.shade300;
-
   final bool searching = true;
 
   @override
@@ -39,12 +35,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [weatherColorStart, weatherColorCenter, weatherColorEnd],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        )),
+        decoration: BoxDecoration(gradient: getGradient(-20)),
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.12,
           bottom: MediaQuery.of(context).size.height * 0.10,
@@ -53,14 +44,46 @@ class HomeScreen extends StatelessWidget {
         ),
         child: Column(
           children: const [
-            WeatherLocation(city: 'a'),
+            WeatherLocation(city: 'Orizaba'),
             Expanded(
-              child: WeatherSummary(weatherType: WeatherType.rainShower),
+              child: WeatherSummary(weatherType: WeatherType.snowFall),
             ),
             TemperatureSummary(max: 30, current: 20, min: 10),
           ],
         ),
       ),
+    );
+  }
+
+  LinearGradient getGradient(double temperature) {
+    final List<Color> colors = [];
+
+    if (temperature > 35) {
+      colors.add(Colors.red.shade800);
+      colors.add(Colors.red.shade500);
+      colors.add(Colors.red.shade300);
+    } else if (temperature > 25) {
+      colors.add(Colors.orange.shade800);
+      colors.add(Colors.orange.shade500);
+      colors.add(Colors.orange.shade300);
+    } else if (temperature > 15) {
+      colors.add(Colors.green.shade800);
+      colors.add(Colors.green.shade500);
+      colors.add(Colors.green.shade300);
+    } else if (temperature > 0) {
+      colors.add(Colors.blue.shade800);
+      colors.add(Colors.blue.shade500);
+      colors.add(Colors.blue.shade300);
+    } else {
+      colors.add(Colors.indigo.shade800);
+      colors.add(Colors.indigo.shade500);
+      colors.add(Colors.indigo.shade300);
+    }
+
+    return LinearGradient(
+      colors: colors,
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
     );
   }
 }
