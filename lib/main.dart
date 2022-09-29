@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';
 
@@ -15,6 +16,12 @@ class WeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Weather app',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en'), Locale('es')],
       theme: ThemeData.dark(),
       initialRoute: homeScreenRoute,
       onGenerateRoute: _router.onGenerateRoute,
