@@ -53,23 +53,20 @@ class HomeScreen extends StatelessWidget {
                   TemperatureSummary(max: 30, current: 20, min: 10),
                 ],
               )
-            : Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const WeatherLocation(city: 'City'),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        WeatherSummary(
-                          weatherType: WeatherType.thunderstorm,
-                          orientation: Orientation.landscape,
-                        ),
-                        TemperatureSummary(max: 30, current: 20, min: 10)
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      WeatherLocation(city: 'City'),
+                      WeatherSummary(
+                        weatherType: WeatherType.thunderstorm,
+                        orientation: Orientation.landscape,
+                      ),
+                    ],
                   ),
+                  const TemperatureSummary(max: 30, current: 20, min: 10)
                 ],
               ),
       ),
