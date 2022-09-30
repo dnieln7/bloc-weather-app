@@ -16,6 +16,11 @@ class TextStyles {
         const TextStyle(fontSize: 32, fontWeight: FontWeight.w400);
   }
 
+  static TextStyle headlineMedium(BuildContext context) {
+    return Theme.of(context).textTheme.headlineMedium ??
+        const TextStyle(fontSize: 28, fontWeight: FontWeight.w400);
+  }
+
   static TextStyle headlineSmall(BuildContext context) {
     return Theme.of(context).textTheme.headlineSmall ??
         const TextStyle(fontSize: 24, fontWeight: FontWeight.w400);

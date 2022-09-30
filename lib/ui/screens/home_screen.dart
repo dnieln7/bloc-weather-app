@@ -13,6 +13,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -35,23 +37,60 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(gradient: getGradient(-20)),
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.12,
-          bottom: MediaQuery.of(context).size.height * 0.10,
-          right: MediaQuery.of(context).size.width * 0.05,
-          left: MediaQuery.of(context).size.width * 0.05,
-        ),
-        child: Column(
-          children: const [
-            WeatherLocation(city: 'Orizaba'),
-            Expanded(
-              child: WeatherSummary(weatherType: WeatherType.snowFall),
-            ),
-            TemperatureSummary(max: 30, current: 20, min: 10),
-          ],
-        ),
+        decoration: BoxDecoration(gradient: getGradient(19)),
+        padding: getPadding(context, orientation),
+        child: orientation == Orientation.portrait
+            ? Column(
+                children: const [
+                  WeatherLocation(city: 'City'),
+                  SizedBox(height: 20),
+                  Expanded(
+                    child: WeatherSummary(
+                      weatherType: WeatherType.snowFall,
+                      orientation: Orientation.portrait,
+                    ),
+                  ),
+                  TemperatureSummary(max: 30, current: 20, min: 10),
+                ],
+              )
+            : Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const WeatherLocation(city: 'City'),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const [
+                        WeatherSummary(
+                          weatherType: WeatherType.thunderstorm,
+                          orientation: Orientation.landscape,
+                        ),
+                        TemperatureSummary(max: 30, current: 20, min: 10)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
       ),
+    );
+  }
+
+  EdgeInsets getPadding(BuildContext context, Orientation orientation) {
+    double verticalMultiplier;
+    double horizontalMultiplier;
+
+    if (orientation == Orientation.portrait) {
+      verticalMultiplier = 0.10;
+      horizontalMultiplier = 0.05;
+    } else {
+      verticalMultiplier = 0.05;
+      horizontalMultiplier = 0.02;
+    }
+
+    return EdgeInsets.symmetric(
+      vertical: MediaQuery.of(context).size.height * verticalMultiplier,
+      horizontal: MediaQuery.of(context).size.width * horizontalMultiplier,
     );
   }
 

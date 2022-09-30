@@ -5,26 +5,41 @@ import 'package:weather_icons/weather_icons.dart';
 
 class WeatherSummary extends StatelessWidget {
   final WeatherType weatherType;
+  final Orientation orientation;
 
   const WeatherSummary({
     required this.weatherType,
+    required this.orientation,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        BoxedIcon(
-          weatherIcon,
-          color: Colors.white,
-          size: MediaQuery.of(context).size.width / 3,
-        ),
-        const SizedBox(height: 10),
-        Text(weather, style: TextStyles.headlineLarge(context)),
-      ],
-    );
+    if (orientation == Orientation.portrait) {
+      return Column(
+        children: [
+          BoxedIcon(
+            weatherIcon,
+            color: Colors.white,
+            size: MediaQuery.of(context).size.width / 3,
+          ),
+          const SizedBox(height: 10),
+          Text(weather, style: TextStyles.headlineLarge(context)),
+        ],
+      );
+    } else {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BoxedIcon(
+            weatherIcon,
+            color: Colors.white,
+            size: MediaQuery.of(context).size.height / 4,
+          ),
+          Text(weather, style: TextStyles.headlineLarge(context)),
+        ],
+      );
+    }
   }
 
   IconData get weatherIcon {

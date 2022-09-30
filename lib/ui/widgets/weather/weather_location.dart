@@ -14,6 +14,7 @@ class WeatherLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(city, style: TextStyles.displayMedium(context)),
         const SizedBox(height: 5),
