@@ -8,6 +8,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => HomeScreen(),
         );
+      case settingsScreenRoute:
+        return MaterialPageRoute(
+          builder: (context) => SettingsScreen(),
+        );
       default:
         return null;
     }

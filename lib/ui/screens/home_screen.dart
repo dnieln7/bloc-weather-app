@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/domain/enum/enums.dart';
+import 'package:weather_app/ui/screens/screens.dart';
 import 'package:weather_app/ui/widgets/animated/animated.dart';
 import 'package:weather_app/ui/widgets/style/text_styles.dart';
 import 'package:weather_app/ui/widgets/weather/weather.dart';
 
-const String homeScreenRoute = "/";
+const String homeScreenRoute = '/';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             : Container(),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pushNamed(settingsScreenRoute),
             icon: const Icon(Icons.settings_rounded),
           )
         ],

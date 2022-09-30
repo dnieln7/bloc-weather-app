@@ -16,15 +16,26 @@ class WeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Weather app',
+      theme: ThemeData.dark().copyWith(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
+            TargetPlatform.iOS: OpenUpwardsPageTransitionsBuilder(),
+            TargetPlatform.windows: OpenUpwardsPageTransitionsBuilder(),
+            TargetPlatform.macOS: OpenUpwardsPageTransitionsBuilder(),
+            TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),
+            TargetPlatform.fuchsia: OpenUpwardsPageTransitionsBuilder(),
+          },
+        ),
+      ),
+      initialRoute: homeScreenRoute,
+      onGenerateRoute: _router.onGenerateRoute,
+      supportedLocales: const [Locale('en'), Locale('es')],
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('en'), Locale('es')],
-      theme: ThemeData.dark(),
-      initialRoute: homeScreenRoute,
-      onGenerateRoute: _router.onGenerateRoute,
     );
   }
 }
