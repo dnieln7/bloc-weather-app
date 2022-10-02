@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/domain/enum/enums.dart';
+import 'package:weather_app/domain/enums/enums.dart';
 import 'package:weather_app/ui/screens/screens.dart';
 import 'package:weather_app/ui/widgets/animated/animated.dart';
 import 'package:weather_app/ui/widgets/style/text_styles.dart';
