@@ -9,17 +9,23 @@ class WeatherApi {
 
   WeatherApi({http.Client? client}) : _client = client ?? http.Client();
 
-  Future<GetWeatherResponse> getWeather() async {
+  Future<GetWeatherResponse> getWeather(GetWeatherRequest request) async {
+    final imperialParameters = {
+      'temperature_unit': 'fahrenheit',
+      'windspeed_unit': 'mph',
+      'precipitation_unit': 'inch',
+    };
+
     final uri = Uri.https(
       _baseUrl,
       '/v1/forecast',
       {
-        'latitude': '18.875',
-        'longitude': '-96.875',
+        'latitude': '${request.latitude}',
+        'longitude': '${request.longitude}',
         'current_weather': 'true',
         'daily': ['weathercode', 'temperature_2m_max', 'temperature_2m_min'],
         'timezone': 'UTC',
-      },
+      }..addAll(request.useMetricSystem ? {} : imperialParameters),
     );
 
     final response = await _client.get(uri, headers: {
