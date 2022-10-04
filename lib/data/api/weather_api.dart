@@ -7,6 +7,7 @@ class WeatherApi {
   final String _baseUrl = 'api.open-meteo.com';
   final http.Client _client;
 
+  // TODO: provide url instead of client
   WeatherApi({http.Client? client}) : _client = client ?? http.Client();
 
   Future<GetWeatherResponse> getWeather(GetWeatherRequest request) async {
