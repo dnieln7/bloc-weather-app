@@ -70,6 +70,8 @@ class WeatherSummary extends StatelessWidget {
         return WeatherIcons.snowflake_cold;
       case WeatherType.snowShower:
         return WeatherIcons.snow_wind;
+      case WeatherType.unknown:
+        return WeatherIcons.na;
     }
   }
 
@@ -101,6 +103,8 @@ class WeatherSummary extends StatelessWidget {
         return 'Snow grains';
       case WeatherType.snowShower:
         return 'Snow showers';
+      case WeatherType.unknown:
+        return 'Unknown';
     }
   }
 }

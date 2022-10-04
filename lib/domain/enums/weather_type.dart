@@ -12,4 +12,5 @@ enum WeatherType {
   snowFall,
   snowGrains,
   snowShower,
+  unknown
 }
