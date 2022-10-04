@@ -9,15 +9,19 @@ abstract class IWeatherRepository {
 }
 
 class WeatherRepository implements IWeatherRepository {
-  final AppPreferences preferences;
-  final WeatherApi weatherApi;
+  final AppPreferences _preferences;
+  final WeatherApi _weatherApi;
 
-  WeatherRepository({required this.preferences, required this.weatherApi});
+  WeatherRepository({
+    required AppPreferences preferences,
+    required WeatherApi weatherApi,
+  })  : _preferences = preferences,
+        _weatherApi = weatherApi;
 
   @override
   Future<Weather> fetchWeather(double longitude, double latitude) async {
-    final useMetricSystem = await preferences.getMetricSystem();
-    final response = await weatherApi.getWeather(GetWeatherRequest(
+    final useMetricSystem = await _preferences.getMetricSystem();
+    final response = await _weatherApi.getWeather(GetWeatherRequest(
       longitude: longitude,
       latitude: latitude,
       useMetricSystem: useMetricSystem,
