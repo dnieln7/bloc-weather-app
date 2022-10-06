@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/data/repository/repositories.dart';
+import 'package:weather_app/state/settings/settings_cubit.dart';
 import 'package:weather_app/ui/screens/screens.dart';
 
 class AppRouter {
@@ -10,7 +13,12 @@ class AppRouter {
         );
       case settingsScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => SettingsScreen(),
+          builder: (context) => BlocProvider<SettingsCubit>(
+            create: (ctx) => SettingsCubit(
+              settingsRepository: context.read<SettingsRepository>(),
+            ),
+            child: SettingsScreen(),
+          ),
         );
       default:
         return null;
