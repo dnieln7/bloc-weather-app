@@ -1,11 +1,11 @@
 class GetWeatherRequest {
-  final double longitude;
   final double latitude;
+  final double longitude;
   final bool useMetricSystem;
 
   GetWeatherRequest({
-    required this.longitude,
     required this.latitude,
+    required this.longitude,
     required this.useMetricSystem,
   });
 }

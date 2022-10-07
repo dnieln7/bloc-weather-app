@@ -19,20 +19,20 @@ class WeatherRepository implements IWeatherRepository {
         _weatherApi = weatherApi;
 
   @override
-  Future<Weather> fetchWeather(double longitude, double latitude) async {
+  Future<Weather> fetchWeather(double latitude, double longitude) async {
     final useMetricSystem = await _preferences.getMetricSystem();
     final response = await _weatherApi.getWeather(GetWeatherRequest(
-      longitude: longitude,
       latitude: latitude,
+      longitude: longitude,
       useMetricSystem: useMetricSystem,
     ));
 
     return Weather(
       weatherType: _getWeatherType(response.currentWeather.weatherCode.toInt()),
       temperatureType: _getTemperatureType(response.currentWeather.temperature),
-      minTemperature: response.dailyWeather.temperature2mMin.first,
-      temperature: response.currentWeather.temperature,
-      maxTemperature: response.dailyWeather.temperature2mMax.first,
+      minTemperature: response.dailyWeather.temperature2mMin.first.round(),
+      temperature: response.currentWeather.temperature.round(),
+      maxTemperature: response.dailyWeather.temperature2mMax.first.round(),
     );
   }
 

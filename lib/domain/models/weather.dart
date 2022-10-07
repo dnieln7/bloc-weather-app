@@ -3,9 +3,9 @@ import 'package:weather_app/domain/enums/enums.dart';
 class Weather {
   final WeatherType weatherType;
   final TemperatureType temperatureType;
-  final double minTemperature;
-  final double temperature;
-  final double maxTemperature;
+  final int minTemperature;
+  final int temperature;
+  final int maxTemperature;
 
   Weather({
     required this.weatherType,
