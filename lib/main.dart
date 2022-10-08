@@ -27,6 +27,9 @@ class WeatherApp extends StatelessWidget {
           create: (ctx) => SettingsRepository(preferences: _preferences),
         ),
         RepositoryProvider(
+          create: (ctx) => LocationRepository(),
+        ),
+        RepositoryProvider(
           create: (ctx) => WeatherRepository(
             preferences: _preferences,
             weatherApi: _weatherApi,
@@ -35,6 +38,7 @@ class WeatherApp extends StatelessWidget {
       ],
       child: BlocProvider<WeatherCubit>(
         create: (ctx) => WeatherCubit(
+          locationRepository: ctx.read<LocationRepository>(),
           weatherRepository: ctx.read<WeatherRepository>(),
         ),
         child: MaterialApp(
