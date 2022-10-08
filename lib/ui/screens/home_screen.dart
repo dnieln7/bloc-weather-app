@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             title: state is WeatherFetchLoading
                 ? loadingIndicator(context)
                 : Container(),
-            actions: menuActions(context),
+            actions: menuActions(context, state),
           ),
           body: state is WeatherFetchSuccess
               ? weatherUi(context, orientation, state)
@@ -43,12 +43,17 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  List<Widget> menuActions(BuildContext context) {
+  List<Widget> menuActions(BuildContext context, WeatherFetchState state) {
     return [
+      if (state is WeatherFetchSuccess || state is WeatherFetchError)
+        IconButton(
+          onPressed: context.read<WeatherCubit>().refresh,
+          icon: const Icon(Icons.refresh_rounded),
+        ),
       IconButton(
         onPressed: () => Navigator.of(context).pushNamed(settingsScreenRoute),
         icon: const Icon(Icons.settings_rounded),
-      )
+      ),
     ];
   }
 

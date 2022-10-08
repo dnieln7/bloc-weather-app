@@ -39,4 +39,20 @@ class ColorStyles {
       end: Alignment.bottomCenter,
     );
   }
+
+  static Color getTemperatureSolid(TemperatureType temperatureType) {
+    if (temperatureType == TemperatureType.veryHot) {
+      return Colors.red.shade500;
+    } else if (temperatureType == TemperatureType.hot) {
+      return Colors.orange.shade500;
+    } else if (temperatureType == TemperatureType.neutral) {
+      return Colors.green.shade500;
+    } else if (temperatureType == TemperatureType.cold) {
+      return Colors.blue.shade500;
+    } else if (temperatureType == TemperatureType.veryCold) {
+      return Colors.indigo.shade500;
+    } else {
+      return Colors.grey.shade500;
+    }
+  }
 }
