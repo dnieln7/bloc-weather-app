@@ -18,23 +18,30 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
     // fetch(-96.875, 18.875);
   }
 
-  void refresh() {
+  Future<void> refresh() async {
     try {
-      fetch(_lastLatitude!, _lastLongitude!);
+      await fetch(_lastLatitude!, _lastLongitude!);
     } on TypeError {
-      print('Could not fetch, one or more arguments are null');
+      emit(
+        WeatherFetchError(
+          error: 'Could not fetch, one or more arguments are null',
+        ),
+      );
     }
   }
 
-  void fetch(double latitude, double longitude) {
+  Future<void> fetch(double latitude, double longitude) async {
     emit(WeatherFetchLoading());
 
     _lastLatitude = latitude;
     _lastLongitude = longitude;
 
-    _weatherRepository
-        .fetchWeather(latitude, longitude)
-        .then((result) => emit(WeatherFetchSuccess(data: result)))
-        .catchError((error) => emit(WeatherFetchError(error: '$error')));
+    try {
+      final result = await _weatherRepository.fetchWeather(latitude, longitude);
+
+      emit(WeatherFetchSuccess(data: result));
+    } catch (error) {
+      emit(WeatherFetchError(error: '$error'));
+    }
   }
 }

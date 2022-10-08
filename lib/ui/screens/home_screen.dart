@@ -5,6 +5,7 @@ import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/screens/screens.dart';
 import 'package:weather_app/ui/widgets/animated/animated.dart';
 import 'package:weather_app/ui/widgets/style/color_styles.dart';
+import 'package:weather_app/ui/widgets/style/insets_styles.dart';
 import 'package:weather_app/ui/widgets/style/text_styles.dart';
 import 'package:weather_app/ui/widgets/weather/weather.dart';
 
@@ -19,59 +20,36 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: searching
-            ? BlinkingContainer(
-                child: Text(
-                  'Loading ...',
-                  style: TextStyles.titleLarge(context),
-                ),
-              )
-            : Container(),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.of(context).pushNamed(
-              settingsScreenRoute,
-            ),
-            icon: const Icon(Icons.settings_rounded),
-          )
-        ],
-      ),
-      body:BlocBuilder<WeatherCubit, WeatherFetchState>(
-          builder: (ctx, state) {
-            if (state is WeatherFetchSuccess) {
-              return weatherUi(context, orientation, state);
-            } else if (state is WeatherFetchError) {
-              return errorUi(context, orientation, state);
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          },
-        ),
+    return BlocBuilder<WeatherCubit, WeatherFetchState>(
+      builder: (context, state) {
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            centerTitle: true,
+            title: state is WeatherFetchLoading
+                ? loadingIndicator(context)
+                : Container(),
+            actions: menuActions(context),
+          ),
+          body: state is WeatherFetchSuccess
+              ? weatherUi(context, orientation, state)
+              : state is WeatherFetchError
+                  ? errorUi(context, orientation, state)
+                  : emptyBody,
+        );
+      },
     );
   }
 
-  EdgeInsets getPadding(BuildContext context, Orientation orientation) {
-    double verticalMultiplier;
-    double horizontalMultiplier;
-
-    if (orientation == Orientation.portrait) {
-      verticalMultiplier = 0.10;
-      horizontalMultiplier = 0.05;
-    } else {
-      verticalMultiplier = 0.05;
-      horizontalMultiplier = 0.02;
-    }
-
-    return EdgeInsets.symmetric(
-      vertical: MediaQuery.of(context).size.height * verticalMultiplier,
-      horizontal: MediaQuery.of(context).size.width * horizontalMultiplier,
-    );
+  List<Widget> menuActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () => Navigator.of(context).pushNamed(settingsScreenRoute),
+        icon: const Icon(Icons.settings_rounded),
+      )
+    ];
   }
 
   Widget weatherUi(
@@ -80,12 +58,12 @@ class HomeScreen extends StatelessWidget {
     WeatherFetchSuccess state,
   ) {
     return Container(
+      padding: InsetsStyles.globalPadding(context, orientation),
       decoration: BoxDecoration(
         gradient: ColorStyles.getTemperatureGradient(
           state.data.temperatureType,
         ),
       ),
-      padding: getPadding(context, orientation),
       child: orientation == Orientation.portrait
           ? Column(
               children: [
@@ -127,9 +105,13 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget errorUi(BuildContext context, Orientation orientation, WeatherFetchError state) {
+  Widget errorUi(
+    BuildContext context,
+    Orientation orientation,
+    WeatherFetchError state,
+  ) {
     return Padding(
-      padding: getPadding(context, orientation),
+      padding: InsetsStyles.globalPadding(context, orientation),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -156,6 +138,25 @@ class HomeScreen extends StatelessWidget {
             child: Text('Try again'.toUpperCase()),
           )
         ],
+      ),
+    );
+  }
+
+  Widget get emptyBody {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: ColorStyles.getTemperatureGradient(
+          TemperatureType.none,
+        ),
+      ),
+    );
+  }
+
+  Widget loadingIndicator(BuildContext context) {
+    return BlinkingContainer(
+      child: Text(
+        'Loading ...',
+        style: TextStyles.titleLarge(context),
       ),
     );
   }

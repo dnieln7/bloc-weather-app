@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/domain/enums/enums.dart';
 
 class ColorStyles {
-  static LinearGradient getTemperatureGradient(TemperatureType temperatureType) {
+  static LinearGradient getTemperatureGradient(
+    TemperatureType temperatureType,
+  ) {
     final List<Color> colors = [];
 
     if (temperatureType == TemperatureType.veryHot) {
@@ -21,10 +23,14 @@ class ColorStyles {
       colors.add(Colors.blue.shade800);
       colors.add(Colors.blue.shade500);
       colors.add(Colors.blue.shade300);
-    } else {
+    } else if (temperatureType == TemperatureType.veryCold) {
       colors.add(Colors.indigo.shade800);
       colors.add(Colors.indigo.shade500);
       colors.add(Colors.indigo.shade300);
+    } else {
+      colors.add(Colors.grey.shade800);
+      colors.add(Colors.grey.shade500);
+      colors.add(Colors.grey.shade300);
     }
 
     return LinearGradient(

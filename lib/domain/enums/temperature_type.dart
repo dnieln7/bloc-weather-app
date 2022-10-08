@@ -4,4 +4,5 @@ enum TemperatureType {
   neutral,
   cold,
   veryCold,
+  none
 }
