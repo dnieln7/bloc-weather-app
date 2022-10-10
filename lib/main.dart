@@ -7,12 +7,17 @@ import 'package:weather_app/data/repository/repositories.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:weather_app/env/app_env.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
+
   runApp(WeatherApp());
 }
 
 class WeatherApp extends StatelessWidget {
+  final AppEnv appEnv = AppEnv();
   final AppRouter _router = AppRouter();
   final AppPreferences _preferences = AppPreferences();
   final WeatherApi _weatherApi = WeatherApi();
