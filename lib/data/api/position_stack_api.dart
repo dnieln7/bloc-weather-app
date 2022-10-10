@@ -26,8 +26,6 @@ class PositionStackApi {
       },
     );
 
-    print('${uri.toString()}');
-
     final response = await _client.get(uri, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
