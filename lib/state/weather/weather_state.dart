@@ -12,7 +12,8 @@ class WeatherFetchError extends WeatherFetchState {
 }
 
 class WeatherFetchSuccess extends WeatherFetchState {
-  final Weather data;
+  final Weather weather;
+  final UserLocation location;
 
-  WeatherFetchSuccess({required this.data});
+  WeatherFetchSuccess({required this.weather, required this.location});
 }

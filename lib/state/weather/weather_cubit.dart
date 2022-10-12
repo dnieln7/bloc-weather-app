@@ -9,16 +9,12 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
   final LocationRepository _locationRepository;
   final WeatherRepository _weatherRepository;
 
-  // double? _lastLatitude;
-  // double? _lastLongitude;
-
   WeatherCubit(
       {required LocationRepository locationRepository,
       required WeatherRepository weatherRepository})
       : _locationRepository = locationRepository,
         _weatherRepository = weatherRepository,
         super(WeatherFetchLoading()) {
-
     _locationRepository.isServiceReady.listen((isReady) {
       if (isReady) {
         _getLocation();
@@ -34,7 +30,7 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
     try {
       final location = await _locationRepository.getLocation();
 
-      _fetch(location.latitude, location.longitude);
+      _fetch(location);
     } catch (e) {
       emit(WeatherFetchError(error: '$e'));
     }
@@ -42,27 +38,18 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
 
   void refresh() {
     _getLocation();
-    // try {
-    //   await _fetch(_lastLatitude!, _lastLongitude!);
-    // } on TypeError {
-    //   emit(
-    //     WeatherFetchError(
-    //       error: 'Could not fetch, one or more arguments are null',
-    //     ),
-    //   );
-    // }
   }
 
-  Future<void> _fetch(double latitude, double longitude) async {
+  Future<void> _fetch(UserLocation location) async {
     emit(WeatherFetchLoading());
 
-    // _lastLatitude = latitude;
-    // _lastLongitude = longitude;
-
     try {
-      final result = await _weatherRepository.fetchWeather(latitude, longitude);
+      final result = await _weatherRepository.fetchWeather(
+        location.latitude,
+        location.longitude,
+      );
 
-      emit(WeatherFetchSuccess(data: result));
+      emit(WeatherFetchSuccess(weather: result, location: location));
     } catch (error) {
       emit(WeatherFetchError(error: '$error'));
     }

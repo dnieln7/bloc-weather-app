@@ -16,8 +16,12 @@ class WeatherLocation extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(city, style: TextStyles.displayMedium(context)),
-        const SizedBox(height: 5),
+        Text(
+          city,
+          textAlign: TextAlign.center,
+          style: TextStyles.displayMedium(context),
+        ),
+        const SizedBox(height: 15),
         Text(
           _getDate(Localizations.localeOf(context).languageCode),
           textAlign: TextAlign.center,

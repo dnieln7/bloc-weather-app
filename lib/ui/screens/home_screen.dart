@@ -66,24 +66,24 @@ class HomeScreen extends StatelessWidget {
       padding: InsetsStyles.globalPadding(context, orientation),
       decoration: BoxDecoration(
         gradient: ColorStyles.getTemperatureGradient(
-          state.data.temperatureType,
+          state.weather.temperatureType,
         ),
       ),
       child: orientation == Orientation.portrait
           ? Column(
               children: [
-                WeatherLocation(city: 'City'),
+                WeatherLocation(city: state.location.locality),
                 const SizedBox(height: 20),
                 Expanded(
                   child: WeatherSummary(
-                    weatherType: state.data.weatherType,
+                    weatherType: state.weather.weatherType,
                     orientation: Orientation.portrait,
                   ),
                 ),
                 TemperatureSummary(
-                  max: state.data.maxTemperature,
-                  current: state.data.temperature,
-                  min: state.data.minTemperature,
+                  max: state.weather.maxTemperature,
+                  current: state.weather.temperature,
+                  min: state.weather.minTemperature,
                 ),
               ],
             )
@@ -93,17 +93,17 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    WeatherLocation(city: 'City'),
+                    WeatherLocation(city: state.location.locality),
                     WeatherSummary(
-                      weatherType: state.data.weatherType,
+                      weatherType: state.weather.weatherType,
                       orientation: Orientation.landscape,
                     ),
                   ],
                 ),
                 TemperatureSummary(
-                  max: state.data.maxTemperature,
-                  current: state.data.temperature,
-                  min: state.data.minTemperature,
+                  max: state.weather.maxTemperature,
+                  current: state.weather.temperature,
+                  min: state.weather.minTemperature,
                 )
               ],
             ),
