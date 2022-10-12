@@ -33,7 +33,12 @@ class WeatherApp extends StatelessWidget {
           create: (ctx) => SettingsRepository(preferences: _preferences),
         ),
         RepositoryProvider(
-          create: (ctx) => LocationRepository(),
+          create: (ctx) => LocationRepository(
+            positionStackApi: PositionStackApi(
+              url: appEnv.positionStackApiURL,
+              key: appEnv.positionStackApiKey,
+            ),
+          ),
         ),
         RepositoryProvider(
           create: (ctx) => WeatherRepository(
