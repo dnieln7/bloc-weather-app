@@ -16,13 +16,13 @@ class PositionStackApi {
         _key = key,
         _client = client ?? http.Client();
 
-  Future<GetReverseLocationResponse> getReverseLocation() async {
+  Future<GetReverseLocationResponse> getReverseLocation(GetReverseLocationRequest request) async {
     final uri = Uri.http(
       _url,
       '/v1/reverse',
       {
         'access_key': _key,
-        'query': '19.418302,-99.161223',
+        'query': '${request.latitude},${request.longitude}',
       },
     );
 
