@@ -32,7 +32,7 @@ class CurrentWeatherResponse {
   factory CurrentWeatherResponse.fromMap(Map<String, dynamic> map) {
     return CurrentWeatherResponse(
       temperature: map['temperature'] as double,
-      weatherCode: map['weathercode'] as double,
+      weatherCode: (map['weathercode'] as int).toDouble(),
     );
   }
 
