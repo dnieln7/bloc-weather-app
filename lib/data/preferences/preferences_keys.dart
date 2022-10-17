@@ -1,7 +1,7 @@
 enum PreferencesKeys {
   metricSystem('use_metric_system');
 
-  final String name;
+  final String identifier;
 
-  const PreferencesKeys(this.name);
+  const PreferencesKeys(this.identifier);
 }

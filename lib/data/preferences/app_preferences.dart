@@ -16,7 +16,7 @@ class AppPreferences {
     }
 
     return await _preferences!.setBool(
-      PreferencesKeys.metricSystem.name,
+      PreferencesKeys.metricSystem.identifier,
       enable,
     );
   }
@@ -26,7 +26,7 @@ class AppPreferences {
       await _init();
     }
 
-    return _preferences!.getBool(PreferencesKeys.metricSystem.name) ??
+    return _preferences!.getBool(PreferencesKeys.metricSystem.identifier) ??
         true;
   }
 
