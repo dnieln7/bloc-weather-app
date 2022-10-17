@@ -27,6 +27,8 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
   }
 
   void _getLocation() async {
+    emit(WeatherFetchLoading());
+
     try {
       final location = await _locationRepository.getLocation();
 
@@ -41,8 +43,6 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
   }
 
   Future<void> _fetch(UserLocation location) async {
-    emit(WeatherFetchLoading());
-
     try {
       final result = await _weatherRepository.fetchWeather(
         location.latitude,
