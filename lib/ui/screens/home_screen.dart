@@ -115,7 +115,8 @@ class HomeScreen extends StatelessWidget {
     Orientation orientation,
     WeatherFetchError state,
   ) {
-    return Padding(
+    return Container(
+      alignment: Alignment.center,
       padding: InsetsStyles.globalPadding(context, orientation),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
