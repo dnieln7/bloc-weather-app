@@ -27,12 +27,17 @@ class WeatherRepository implements IWeatherRepository {
       useMetricSystem: useMetricSystem,
     ));
 
+    final TemperatureType temperatureType = useMetricSystem
+        ? _getMetricTemperatureType(response.currentWeather.temperature)
+        : _getTemperatureType(response.currentWeather.temperature);
+
     return Weather(
       weatherType: _getWeatherType(response.currentWeather.weatherCode.toInt()),
-      temperatureType: _getTemperatureType(response.currentWeather.temperature),
+      temperatureType: temperatureType,
       minTemperature: response.dailyWeather.temperature2mMin.first.round(),
       temperature: response.currentWeather.temperature.round(),
       maxTemperature: response.dailyWeather.temperature2mMax.first.round(),
+      useMetricSystem: useMetricSystem,
     );
   }
 
@@ -84,7 +89,7 @@ class WeatherRepository implements IWeatherRepository {
     }
   }
 
-  TemperatureType _getTemperatureType(double temperature) {
+  TemperatureType _getMetricTemperatureType(double temperature) {
     if (temperature > 35) {
       return TemperatureType.veryHot;
     } else if (temperature > 25) {
@@ -92,6 +97,20 @@ class WeatherRepository implements IWeatherRepository {
     } else if (temperature > 15) {
       return TemperatureType.neutral;
     } else if (temperature > 0) {
+      return TemperatureType.cold;
+    } else {
+      return TemperatureType.veryCold;
+    }
+  }
+
+  TemperatureType _getTemperatureType(double temperature) {
+    if (temperature > 95) {
+      return TemperatureType.veryHot;
+    } else if (temperature > 77) {
+      return TemperatureType.hot;
+    } else if (temperature > 59) {
+      return TemperatureType.neutral;
+    } else if (temperature > 32) {
       return TemperatureType.cold;
     } else {
       return TemperatureType.veryCold;

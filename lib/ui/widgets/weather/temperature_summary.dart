@@ -7,11 +7,13 @@ class TemperatureSummary extends StatelessWidget {
   final int max;
   final int current;
   final int min;
+  final bool useMetricSystem;
 
   const TemperatureSummary({
     required this.max,
     required this.current,
     required this.min,
+    required this.useMetricSystem,
     Key? key,
   }) : super(key: key);
 
@@ -23,7 +25,7 @@ class TemperatureSummary extends StatelessWidget {
       children: [
         IconText(
           adaptiveIconSize: false,
-          text: 'Temperature',
+          text: "Temperature (${useMetricSystem ? '°C' : '°F'})",
           icon: Icons.thermostat_rounded,
           style: TextStyles.titleMedium(context),
         ),

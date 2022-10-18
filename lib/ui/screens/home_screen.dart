@@ -84,6 +84,7 @@ class HomeScreen extends StatelessWidget {
                   max: state.weather.maxTemperature,
                   current: state.weather.temperature,
                   min: state.weather.minTemperature,
+                  useMetricSystem: state.weather.useMetricSystem,
                 ),
               ],
             )
@@ -104,6 +105,7 @@ class HomeScreen extends StatelessWidget {
                   max: state.weather.maxTemperature,
                   current: state.weather.temperature,
                   min: state.weather.minTemperature,
+                  useMetricSystem: state.weather.useMetricSystem,
                 )
               ],
             ),
