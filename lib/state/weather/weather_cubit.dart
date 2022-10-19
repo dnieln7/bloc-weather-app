@@ -34,7 +34,7 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
 
       _fetch(location);
     } catch (e) {
-      emit(WeatherFetchError(error: '$e'));
+      emit(WeatherFetchError(error: 'Location Error: $e'));
     }
   }
 
@@ -51,7 +51,7 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
 
       emit(WeatherFetchSuccess(weather: result, location: location));
     } catch (error) {
-      emit(WeatherFetchError(error: '$error'));
+      emit(WeatherFetchError(error: 'Weather error: $error'));
     }
   }
 

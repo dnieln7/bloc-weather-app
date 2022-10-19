@@ -1,15 +1,16 @@
+import 'dart:developer' as logger;
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/domain/enums/enums.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
-import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';
 import 'package:weather_app/ui/widgets/animated/animated.dart';
 import 'package:weather_app/ui/widgets/style/color_styles.dart';
 import 'package:weather_app/ui/widgets/style/insets_styles.dart';
 import 'package:weather_app/ui/widgets/style/text_styles.dart';
 import 'package:weather_app/ui/widgets/weather/weather.dart';
-import 'dart:developer' as logger;
 
 const String homeScreenRoute = '/';
 
@@ -116,16 +117,19 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(
-                      flex: 40,
+                      flex: 50,
                       fit: FlexFit.tight,
                       child: WeatherLocation(city: state.location.locality),
                     ),
-                    WeatherSummary(
-                      weatherType: state.weather.weatherType,
-                      orientation: Orientation.landscape,
+                    Flexible(
+                      flex: 50,
+                      fit: FlexFit.tight,
+                      child: WeatherSummary(
+                        weatherType: state.weather.weatherType,
+                        orientation: Orientation.landscape,
+                      ),
                     ),
                   ],
                 ),
