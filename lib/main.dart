@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:weather_app/data/api/position_stack_api.dart';
 import 'package:weather_app/data/api/weather_api.dart';
 import 'package:weather_app/data/preferences/preferences.dart';
 import 'package:weather_app/data/repository/repositories.dart';
+import 'package:weather_app/env/app_env.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:weather_app/env/app_env.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");

@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'dart:developer' as logger;
 
 import 'package:location/location.dart';
-import 'dart:developer' as logger;
 
 class LocationService {
   final Location _location;
