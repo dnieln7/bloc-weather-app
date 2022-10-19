@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/domain/enums/enums.dart';
 import 'package:weather_app/state/settings/settings_cubit.dart';
+import 'package:weather_app/ui/widgets/style/color_styles.dart';
 
 const String settingsScreenRoute = '/settings';
 
+class SettingsScreenArgs {
+  final TemperatureType temperatureType;
+
+  SettingsScreenArgs({required this.temperatureType});
+}
+
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  final SettingsScreenArgs args;
+
+  const SettingsScreen({
+    Key? key,
+    required this.args,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +44,9 @@ class SettingsScreen extends StatelessWidget {
             return Column(
               children: [
                 SwitchListTile(
-                  activeColor: Colors.white,
+                  activeColor: ColorStyles.getTemperatureSolid(
+                    args.temperatureType,
+                  ),
                   value: state.settings.useMetricSystem,
                   onChanged: (value) {
                     context.read<SettingsCubit>().setMetricSystem(value);

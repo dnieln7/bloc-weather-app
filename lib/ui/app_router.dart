@@ -17,7 +17,9 @@ class AppRouter {
             create: (ctx) => SettingsCubit(
               settingsRepository: context.read<SettingsRepository>(),
             ),
-            child: const SettingsScreen(),
+            child: SettingsScreen(
+              args: settings.arguments as SettingsScreenArgs,
+            ),
           ),
         );
       default:

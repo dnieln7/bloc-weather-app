@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/domain/enums/enums.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
+import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';
 import 'package:weather_app/ui/widgets/animated/animated.dart';
 import 'package:weather_app/ui/widgets/style/color_styles.dart';
 import 'package:weather_app/ui/widgets/style/insets_styles.dart';
 import 'package:weather_app/ui/widgets/style/text_styles.dart';
 import 'package:weather_app/ui/widgets/weather/weather.dart';
+import 'dart:developer' as logger;
 
 const String homeScreenRoute = '/';
 
@@ -44,17 +46,39 @@ class HomeScreen extends StatelessWidget {
   }
 
   List<Widget> menuActions(BuildContext context, WeatherFetchState state) {
-    return [
-      if (state is WeatherFetchSuccess || state is WeatherFetchError)
+    final TemperatureType temperatureType;
+
+    if (state is WeatherFetchSuccess) {
+      temperatureType = state.weather.temperatureType;
+    } else {
+      temperatureType = TemperatureType.none;
+    }
+
+    if (state is WeatherFetchSuccess || state is WeatherFetchError) {
+      return [
         IconButton(
           onPressed: context.read<WeatherCubit>().refresh,
           icon: const Icon(Icons.refresh_rounded),
         ),
-      IconButton(
-        onPressed: () => Navigator.of(context).pushNamed(settingsScreenRoute),
-        icon: const Icon(Icons.settings_rounded),
-      ),
-    ];
+        IconButton(
+          onPressed: () => {
+            Navigator.of(context)
+                .pushNamed(
+                  settingsScreenRoute,
+                  arguments:
+                      SettingsScreenArgs(temperatureType: temperatureType),
+                )
+                .then((value) => context.read<WeatherCubit>().refresh())
+                .catchError((error) {
+              logger.log('error: $error');
+            })
+          },
+          icon: const Icon(Icons.settings_rounded),
+        ),
+      ];
+    } else {
+      return [];
+    }
   }
 
   Widget weatherUi(
@@ -92,9 +116,13 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    WeatherLocation(city: state.location.locality),
+                    Flexible(
+                      flex: 40,
+                      fit: FlexFit.tight,
+                      child: WeatherLocation(city: state.location.locality),
+                    ),
                     WeatherSummary(
                       weatherType: state.weather.weatherType,
                       orientation: Orientation.landscape,
@@ -106,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                   current: state.weather.temperature,
                   min: state.weather.minTemperature,
                   useMetricSystem: state.weather.useMetricSystem,
-                )
+                ),
               ],
             ),
     );

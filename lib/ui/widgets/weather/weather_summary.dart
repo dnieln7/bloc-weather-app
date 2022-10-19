@@ -24,19 +24,27 @@ class WeatherSummary extends StatelessWidget {
             size: MediaQuery.of(context).size.width / 3,
           ),
           const SizedBox(height: 10),
-          Text(weather, style: TextStyles.headlineLarge(context)),
+          Text(
+            weather,
+            textAlign: TextAlign.center,
+            style: TextStyles.headlineLarge(context),
+          ),
         ],
       );
     } else {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      return Column(
         children: [
           BoxedIcon(
             weatherIcon,
             color: Colors.white,
             size: MediaQuery.of(context).size.height / 4,
           ),
-          Text(weather, style: TextStyles.headlineLarge(context)),
+          const SizedBox(height: 10),
+          Text(
+            weather,
+            textAlign: TextAlign.center,
+            style: TextStyles.headlineLarge(context),
+          ),
         ],
       );
     }
