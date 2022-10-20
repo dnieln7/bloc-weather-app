@@ -1,7 +1,6 @@
-import 'dart:developer' as logger;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:weather_app/domain/enums/enums.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/screens/screens.dart';
@@ -14,9 +13,9 @@ import 'package:weather_app/ui/widgets/weather/weather.dart';
 const String homeScreenRoute = '/';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  final AppLocalizations localizations;
 
-  final bool searching = true;
+  HomeScreen({Key? key, required this.localizations}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +58,7 @@ class HomeScreen extends StatelessWidget {
         IconButton(
           onPressed: context.read<WeatherCubit>().refresh,
           icon: const Icon(Icons.refresh_rounded),
+          tooltip: localizations.refresh,
         ),
         IconButton(
           onPressed: () => {
@@ -69,11 +69,10 @@ class HomeScreen extends StatelessWidget {
                       SettingsScreenArgs(temperatureType: temperatureType),
                 )
                 .then((value) => context.read<WeatherCubit>().refresh())
-                .catchError((error) {
-              logger.log('error: $error');
-            })
+                .catchError((error) {})
           },
           icon: const Icon(Icons.settings_rounded),
+          tooltip: localizations.settings,
         ),
       ];
     } else {
@@ -100,11 +99,13 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 Expanded(
                   child: WeatherSummary(
+                    localizations: localizations,
                     weatherType: state.weather.weatherType,
                     orientation: Orientation.portrait,
                   ),
                 ),
                 TemperatureSummary(
+                  localizations: localizations,
                   max: state.weather.maxTemperature,
                   current: state.weather.temperature,
                   min: state.weather.minTemperature,
@@ -126,6 +127,7 @@ class HomeScreen extends StatelessWidget {
                       flex: 50,
                       fit: FlexFit.tight,
                       child: WeatherSummary(
+                        localizations: localizations,
                         weatherType: state.weather.weatherType,
                         orientation: Orientation.landscape,
                       ),
@@ -133,6 +135,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 TemperatureSummary(
+                  localizations: localizations,
                   max: state.weather.maxTemperature,
                   current: state.weather.temperature,
                   min: state.weather.minTemperature,
@@ -161,7 +164,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Error fetching current weather',
+            localizations.errorFetchingCurrentWeather,
             textAlign: TextAlign.center,
             style: TextStyles.titleLarge(context),
           ),
@@ -174,7 +177,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: context.read<WeatherCubit>().refresh,
-            child: Text('Try again'.toUpperCase()),
+            child: Text(localizations.tryAgain.toUpperCase()),
           )
         ],
       ),
@@ -194,7 +197,7 @@ class HomeScreen extends StatelessWidget {
   Widget loadingIndicator(BuildContext context) {
     return BlinkingContainer(
       child: Text(
-        'Loading ...',
+        localizations.loading,
         style: TextStyles.titleLarge(context),
       ),
     );

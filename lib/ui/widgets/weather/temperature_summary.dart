@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/ui/widgets/style/text_styles.dart';
 import 'package:weather_app/ui/widgets/text/text.dart';
 import 'package:weather_icons/weather_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TemperatureSummary extends StatelessWidget {
+  final AppLocalizations localizations;
   final int max;
   final int current;
   final int min;
   final bool useMetricSystem;
 
   const TemperatureSummary({
+    required this.localizations,
     required this.max,
     required this.current,
     required this.min,
@@ -25,7 +28,7 @@ class TemperatureSummary extends StatelessWidget {
       children: [
         IconText(
           adaptiveIconSize: false,
-          text: "Temperature (${useMetricSystem ? '°C' : '°F'})",
+          text: "${localizations.temperature} (${useMetricSystem ? '°C' : '°F'})",
           icon: Icons.thermostat_rounded,
           style: TextStyles.titleMedium(context),
         ),
@@ -35,7 +38,7 @@ class TemperatureSummary extends StatelessWidget {
           children: [
             IconText(
               adaptiveIconSize: false,
-              text: 'Max: $max°',
+              text: '${localizations.max}: $max°',
               icon: WeatherIcons.direction_up,
               style: TextStyles.titleMedium(context),
             ),
@@ -49,7 +52,7 @@ class TemperatureSummary extends StatelessWidget {
             IconText(
               reversed: true,
               adaptiveIconSize: false,
-              text: 'Min: $min°',
+              text: '${localizations.min}: $min°',
               icon: WeatherIcons.direction_down,
               style: TextStyles.titleMedium(context),
             ),

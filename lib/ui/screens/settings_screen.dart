@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/domain/enums/enums.dart';
 import 'package:weather_app/state/settings/settings_cubit.dart';
 import 'package:weather_app/ui/widgets/style/color_styles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const String settingsScreenRoute = '/settings';
 
@@ -13,10 +14,13 @@ class SettingsScreenArgs {
 }
 
 class SettingsScreen extends StatelessWidget {
+
+  final AppLocalizations localizations;
   final SettingsScreenArgs args;
 
   const SettingsScreen({
     Key? key,
+    required this.localizations,
     required this.args,
   }) : super(key: key);
 
@@ -29,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Settings'),
+        title: Text(localizations.settings),
       ),
       body: BlocConsumer<SettingsCubit, SettingsState>(
         listener: (ctx, state) {
@@ -51,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
                   onChanged: (value) {
                     context.read<SettingsCubit>().setMetricSystem(value);
                   },
-                  title: const Text('Use metric system'),
+                  title: Text(localizations.useMetricSystem),
                 )
               ],
             );

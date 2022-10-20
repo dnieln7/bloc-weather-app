@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/domain/enums/enums.dart';
 import 'package:weather_app/ui/widgets/style/text_styles.dart';
 import 'package:weather_icons/weather_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WeatherSummary extends StatelessWidget {
+  final AppLocalizations localizations;
   final WeatherType weatherType;
   final Orientation orientation;
 
   const WeatherSummary({
+    required this.localizations,
     required this.weatherType,
     required this.orientation,
     Key? key,
@@ -86,33 +89,33 @@ class WeatherSummary extends StatelessWidget {
   String get weather {
     switch (weatherType) {
       case WeatherType.clearSky:
-        return 'Clear sky';
+        return localizations.clearSky;
       case WeatherType.cloudy:
-        return 'Partly cloudy';
+        return localizations.cloudy;
       case WeatherType.fog:
-        return 'Fog';
+        return localizations.fog;
       case WeatherType.drizzle:
-        return 'Drizzle';
+        return localizations.drizzle;
       case WeatherType.freezingDrizzle:
-        return 'Freezing drizzle';
+        return localizations.freezingDrizzle;
       case WeatherType.rain:
-        return 'Rain';
+        return localizations.rain;
       case WeatherType.rainShower:
-        return 'Rain showers';
+        return localizations.rainShower;
       case WeatherType.thunderstorm:
-        return 'Thunderstorm';
+        return localizations.thunderstorm;
       case WeatherType.hailThunderstorm:
-        return 'Thunderstorm with hail';
+        return localizations.hailThunderstorm;
       case WeatherType.freezingRain:
-        return 'Freezing rain';
+        return localizations.freezingRain;
       case WeatherType.snowFall:
-        return 'Snow fall';
+        return localizations.snowFall;
       case WeatherType.snowGrains:
-        return 'Snow grains';
+        return localizations.snowGrains;
       case WeatherType.snowShower:
-        return 'Snow showers';
+        return localizations.snowShower;
       case WeatherType.unknown:
-        return 'Unknown';
+        return localizations.unknown;
     }
   }
 }

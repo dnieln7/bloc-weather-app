@@ -10,6 +10,7 @@ import 'package:weather_app/env/app_env.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -57,8 +58,8 @@ class WeatherApp extends StatelessWidget {
           theme: theme,
           initialRoute: homeScreenRoute,
           onGenerateRoute: _router.onGenerateRoute,
-          supportedLocales: locales,
-          localizationsDelegates: localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
         ),
       ),
     );
@@ -77,17 +78,5 @@ class WeatherApp extends StatelessWidget {
         },
       ),
     );
-  }
-
-  List<Locale> get locales {
-    return const [Locale('en'), Locale('es')];
-  }
-
-  List<LocalizationsDelegate<dynamic>> get localizationsDelegates {
-    return const [
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ];
   }
 }
