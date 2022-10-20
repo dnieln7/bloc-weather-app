@@ -54,6 +54,7 @@ class WeatherApp extends StatelessWidget {
           weatherRepository: ctx.read<WeatherRepository>(),
         ),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Weather app',
           theme: theme,
           initialRoute: homeScreenRoute,
