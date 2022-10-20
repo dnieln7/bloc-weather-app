@@ -16,7 +16,8 @@ class PositionStackApi {
         _key = key,
         _client = client ?? http.Client();
 
-  Future<GetReverseLocationResponse> getReverseLocation(GetReverseLocationRequest request) async {
+  Future<GetReverseLocationResponse> getReverseLocation(
+      GetReverseLocationRequest request) async {
     final uri = Uri.http(
       _url,
       '/v1/reverse',
@@ -35,8 +36,17 @@ class PositionStackApi {
       throw ApiException(code: response.statusCode, message: response.body);
     }
 
-    final decoded = jsonDecode(response.body) as Map<String, dynamic>;
-    final parsed = GetReverseLocationResponse.fromMap(decoded);
+    GetReverseLocationResponse parsed;
+
+    try {
+      final decoded = jsonDecode(response.body) as Map<String, dynamic>;
+      parsed = GetReverseLocationResponse.fromMap(decoded);
+    } catch (e) {
+      throw const ApiException(
+        code: 500,
+        message: 'Position stack api internal error',
+      );
+    }
 
     return parsed;
   }
