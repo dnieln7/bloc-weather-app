@@ -17,7 +17,7 @@ const String homeScreenRoute = '/';
 class HomeScreen extends StatelessWidget {
   final AppLocalizations localizations;
 
-  HomeScreen({Key? key, required this.localizations}) : super(key: key);
+  const HomeScreen({Key? key, required this.localizations}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

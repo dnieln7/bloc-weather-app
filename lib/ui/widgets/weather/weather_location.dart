@@ -15,11 +15,12 @@ class WeatherLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          city,
-          textAlign: TextAlign.center,
-          style: AppTexts.displayMedium(context),
-        ),
+        if (city != 'N/A')
+          Text(
+            city,
+            textAlign: TextAlign.center,
+            style: AppTexts.displayMedium(context),
+          ),
         const SizedBox(height: 15),
         Text(
           _getDate(Localizations.localeOf(context).languageCode),
