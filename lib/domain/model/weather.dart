@@ -1,4 +1,4 @@
-import 'package:weather_app/domain/enums/enums.dart';
+import 'package:weather_app/domain/enum/enums.dart';
 
 class Weather {
   final WeatherType weatherType;

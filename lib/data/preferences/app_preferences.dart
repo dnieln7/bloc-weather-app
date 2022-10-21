@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_app/data/preferences/preferences_keys.dart';
+import 'package:weather_app/data/preferences/app_preferences_keys.dart';
 
 class AppPreferences {
   SharedPreferences? _preferences;
@@ -16,7 +16,7 @@ class AppPreferences {
     }
 
     return await _preferences!.setBool(
-      PreferencesKeys.metricSystem.identifier,
+      AppPreferencesKeys.metricSystem.identifier,
       enable,
     );
   }
@@ -26,7 +26,7 @@ class AppPreferences {
       await _init();
     }
 
-    return _preferences!.getBool(PreferencesKeys.metricSystem.identifier) ??
+    return _preferences!.getBool(AppPreferencesKeys.metricSystem.identifier) ??
         true;
   }
 

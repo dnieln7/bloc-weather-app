@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:recase/recase.dart';
-import 'package:weather_app/ui/widgets/style/text_styles.dart';
+import 'package:weather_app/ui/widgets/style/app_texts.dart';
 
 class WeatherLocation extends StatelessWidget {
   final String city;
@@ -18,13 +18,13 @@ class WeatherLocation extends StatelessWidget {
         Text(
           city,
           textAlign: TextAlign.center,
-          style: TextStyles.displayMedium(context),
+          style: AppTexts.displayMedium(context),
         ),
         const SizedBox(height: 15),
         Text(
           _getDate(Localizations.localeOf(context).languageCode),
           textAlign: TextAlign.center,
-          style: TextStyles.headlineSmall(context),
+          style: AppTexts.headlineSmall(context),
         )
       ],
     );

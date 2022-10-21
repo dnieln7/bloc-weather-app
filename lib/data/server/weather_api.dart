@@ -1,15 +1,17 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:weather_app/data/api/exceptions/exceptions.dart';
-import 'package:weather_app/data/api/models/models.dart';
+import 'package:weather_app/data/server/exception/exceptions.dart';
+import 'package:weather_app/data/server/request/requests.dart';
+import 'package:weather_app/data/server/response/responses.dart';
 
 class WeatherApi {
-  final String _baseUrl = 'api.open-meteo.com';
+  final String _url;
   final http.Client _client;
 
-  // TODO: provide url instead of client
-  WeatherApi({http.Client? client}) : _client = client ?? http.Client();
+  WeatherApi({required String url})
+      : _url = url,
+        _client = http.Client();
 
   Future<GetWeatherResponse> getWeather(GetWeatherRequest request) async {
     final imperialParameters = {
@@ -19,7 +21,7 @@ class WeatherApi {
     };
 
     final uri = Uri.https(
-      _baseUrl,
+      _url,
       '/v1/forecast',
       {
         'latitude': '${request.latitude}',

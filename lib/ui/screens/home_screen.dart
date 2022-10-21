@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:weather_app/domain/enums/enums.dart';
+import 'package:weather_app/domain/enum/enums.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/screens/screens.dart';
-import 'package:weather_app/ui/widgets/animated/animated.dart';
-import 'package:weather_app/ui/widgets/style/color_styles.dart';
-import 'package:weather_app/ui/widgets/style/insets_styles.dart';
-import 'package:weather_app/ui/widgets/style/text_styles.dart';
-import 'package:weather_app/ui/widgets/weather/weather.dart';
+import 'package:weather_app/ui/widgets/animated/blinking_container.dart';
+import 'package:weather_app/ui/widgets/style/app_colors.dart';
+import 'package:weather_app/ui/widgets/style/app_insets.dart';
+import 'package:weather_app/ui/widgets/style/app_texts.dart';
+import 'package:weather_app/ui/widgets/weather/temperature_summary.dart';
+import 'package:weather_app/ui/widgets/weather/weather_location.dart';
+import 'package:weather_app/ui/widgets/weather/weather_summary.dart';
 
 const String homeScreenRoute = '/';
 
@@ -86,9 +88,9 @@ class HomeScreen extends StatelessWidget {
     WeatherFetchSuccess state,
   ) {
     return Container(
-      padding: InsetsStyles.globalPadding(context, orientation),
+      padding: AppInsets.globalPadding(context, orientation),
       decoration: BoxDecoration(
-        gradient: ColorStyles.getTemperatureGradient(
+        gradient: AppColors.getTemperatureGradient(
           state.weather.temperatureType,
         ),
       ),
@@ -153,7 +155,7 @@ class HomeScreen extends StatelessWidget {
   ) {
     return Container(
       alignment: Alignment.center,
-      padding: InsetsStyles.globalPadding(context, orientation),
+      padding: AppInsets.globalPadding(context, orientation),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -166,13 +168,13 @@ class HomeScreen extends StatelessWidget {
           Text(
             localizations.errorFetchingCurrentWeather,
             textAlign: TextAlign.center,
-            style: TextStyles.titleLarge(context),
+            style: AppTexts.titleLarge(context),
           ),
           const SizedBox(height: 5),
           Text(
             state.error,
             textAlign: TextAlign.center,
-            style: TextStyles.titleSmall(context),
+            style: AppTexts.titleSmall(context),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
@@ -187,7 +189,7 @@ class HomeScreen extends StatelessWidget {
   Widget get emptyBody {
     return Container(
       decoration: BoxDecoration(
-        gradient: ColorStyles.getTemperatureGradient(
+        gradient: AppColors.getTemperatureGradient(
           TemperatureType.none,
         ),
       ),
@@ -198,7 +200,7 @@ class HomeScreen extends StatelessWidget {
     return BlinkingContainer(
       child: Text(
         localizations.loading,
-        style: TextStyles.titleLarge(context),
+        style: AppTexts.titleLarge(context),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/domain/enums/enums.dart';
-import 'package:weather_app/ui/widgets/style/text_styles.dart';
+import 'package:weather_app/domain/enum/enums.dart';
+import 'package:weather_app/ui/widgets/style/app_texts.dart';
 import 'package:weather_icons/weather_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -30,7 +30,7 @@ class WeatherSummary extends StatelessWidget {
           Text(
             weather,
             textAlign: TextAlign.center,
-            style: TextStyles.headlineLarge(context),
+            style: AppTexts.headlineLarge(context),
           ),
         ],
       );
@@ -46,7 +46,7 @@ class WeatherSummary extends StatelessWidget {
           Text(
             weather,
             textAlign: TextAlign.center,
-            style: TextStyles.headlineLarge(context),
+            style: AppTexts.headlineLarge(context),
           ),
         ],
       );

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:weather_app/data/api/position_stack_api.dart';
-import 'package:weather_app/data/api/weather_api.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:weather_app/config/env/app_env.dart';
 import 'package:weather_app/data/preferences/preferences.dart';
 import 'package:weather_app/data/repository/repositories.dart';
-import 'package:weather_app/env/app_env.dart';
+import 'package:weather_app/data/server/servers.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -22,7 +20,6 @@ class WeatherApp extends StatelessWidget {
   final AppEnv appEnv = AppEnv();
   final AppRouter _router = AppRouter();
   final AppPreferences _preferences = AppPreferences();
-  final WeatherApi _weatherApi = WeatherApi();
 
   WeatherApp({Key? key}) : super(key: key);
 
@@ -44,7 +41,7 @@ class WeatherApp extends StatelessWidget {
         RepositoryProvider(
           create: (ctx) => WeatherRepository(
             preferences: _preferences,
-            weatherApi: _weatherApi,
+            weatherApi: WeatherApi(url: appEnv.openWeatherApiURL),
           ),
         ),
       ],

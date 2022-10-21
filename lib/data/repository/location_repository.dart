@@ -1,7 +1,7 @@
-import 'package:weather_app/data/api/models/models.dart';
-import 'package:weather_app/data/api/position_stack_api.dart';
-import 'package:weather_app/domain/models/models.dart';
-import 'package:weather_app/services/location_service.dart';
+import 'package:weather_app/data/server/request/requests.dart';
+import 'package:weather_app/data/server/servers.dart';
+import 'package:weather_app/domain/model/models.dart';
+import 'package:weather_app/service/services.dart';
 
 abstract class ILocationRepository {
   Future<UserLocation> getLocation();

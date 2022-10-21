@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/domain/enums/enums.dart';
+import 'package:weather_app/domain/enum/enums.dart';
 
-class ColorStyles {
+class AppColors {
   static LinearGradient getTemperatureGradient(
     TemperatureType temperatureType,
   ) {

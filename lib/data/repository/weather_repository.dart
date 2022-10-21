@@ -1,8 +1,8 @@
-import 'package:weather_app/data/api/models/models.dart';
-import 'package:weather_app/data/api/weather_api.dart';
+import 'package:weather_app/data/server/request/requests.dart';
+import 'package:weather_app/data/server/weather_api.dart';
 import 'package:weather_app/data/preferences/preferences.dart';
-import 'package:weather_app/domain/enums/enums.dart';
-import 'package:weather_app/domain/models/models.dart';
+import 'package:weather_app/domain/enum/enums.dart';
+import 'package:weather_app/domain/model/models.dart';
 
 abstract class IWeatherRepository {
   Future<Weather> fetchWeather(double longitude, double latitude);

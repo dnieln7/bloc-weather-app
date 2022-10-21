@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class InsetsStyles {
+class AppInsets {
   static EdgeInsets globalPadding(BuildContext context, Orientation orientation) {
     double verticalMultiplier;
     double horizontalMultiplier;

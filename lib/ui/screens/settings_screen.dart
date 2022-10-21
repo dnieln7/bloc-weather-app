@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/domain/enums/enums.dart';
+import 'package:weather_app/domain/enum/enums.dart';
 import 'package:weather_app/state/settings/settings_cubit.dart';
-import 'package:weather_app/ui/widgets/style/color_styles.dart';
+import 'package:weather_app/ui/widgets/style/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const String settingsScreenRoute = '/settings';
@@ -48,7 +48,7 @@ class SettingsScreen extends StatelessWidget {
             return Column(
               children: [
                 SwitchListTile(
-                  activeColor: ColorStyles.getTemperatureSolid(
+                  activeColor: AppColors.getTemperatureSolid(
                     args.temperatureType,
                   ),
                   value: state.settings.useMetricSystem,
