@@ -9,10 +9,10 @@ class WeatherCubit extends Cubit<WeatherFetchState> {
   final LocationRepository _locationRepository;
   final WeatherRepository _weatherRepository;
 
-  WeatherCubit(
-      {required LocationRepository locationRepository,
-      required WeatherRepository weatherRepository})
-      : _locationRepository = locationRepository,
+  WeatherCubit({
+    required LocationRepository locationRepository,
+    required WeatherRepository weatherRepository,
+  })  : _locationRepository = locationRepository,
         _weatherRepository = weatherRepository,
         super(WeatherFetchLoading()) {
     _locationRepository.isServiceReady.listen((isReady) {
