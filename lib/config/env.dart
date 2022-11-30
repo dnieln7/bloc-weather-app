@@ -11,7 +11,5 @@ abstract class Env {
 
   String get openWeatherApiURL;
 
-  String get positionStackApiURL;
-
-  String get positionStackApiKey;
+  String get openStreetMapApiURL;
 }

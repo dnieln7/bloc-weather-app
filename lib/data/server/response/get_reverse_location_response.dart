@@ -1,55 +1,45 @@
-
-
 class GetReverseLocationResponse {
-  final List<ReverseLocationData> data;
+  final String name;
+  final String displayName;
+  final AddressInfo addressInfo;
 
-  GetReverseLocationResponse({required this.data});
+  const GetReverseLocationResponse({
+    required this.name,
+    required this.displayName,
+    required this.addressInfo,
+  });
 
   factory GetReverseLocationResponse.fromMap(Map<String, dynamic> map) {
-    final List<ReverseLocationData> data = [];
-
-    (map['data'] as List<dynamic>).forEach((element) {
-      data.add(ReverseLocationData.fromMap(element as Map<String, dynamic>));
-    });
-
-    return GetReverseLocationResponse(data: data);
+    return GetReverseLocationResponse(
+      name: map['name'] as String,
+      displayName: map['display_name'] as String,
+      addressInfo: AddressInfo.fromMap(map['address']),
+    );
   }
 
   @override
   String toString() {
-    return 'GetReverseLocationResponse{data: $data}';
+    return 'GetReverseLocationResponse{name: $name, displayName: $displayName, addressInfo: $addressInfo}';
   }
 }
 
-class ReverseLocationData {
-  final double latitude;
-  final double longitude;
-  final String name;
-  final String locality;
-  final String region;
-  final String regionCode;
+class AddressInfo {
+  final String city;
+  final String postCode;
   final String country;
   final String countryCode;
 
-  ReverseLocationData({
-    required this.latitude,
-    required this.longitude,
-    required this.name,
-    required this.locality,
-    required this.region,
-    required this.regionCode,
+  const AddressInfo({
+    required this.city,
+    required this.postCode,
     required this.country,
     required this.countryCode,
   });
 
-  factory ReverseLocationData.fromMap(Map<String, dynamic> map) {
-    return ReverseLocationData(
-      latitude: map['latitude'] as double,
-      longitude: map['longitude'] as double,
-      name: map['name'] as String,
-      locality: map['locality'] as String,
-      region: map['region'] as String,
-      regionCode: map['region_code'] as String,
+  factory AddressInfo.fromMap(Map<String, dynamic> map) {
+    return AddressInfo(
+      city: map['city'] as String,
+      postCode: map['postcode'] as String,
       country: map['country'] as String,
       countryCode: map['country_code'] as String,
     );
@@ -57,6 +47,6 @@ class ReverseLocationData {
 
   @override
   String toString() {
-    return 'ReverseLocationData{latitude: $latitude, longitude: $longitude, name: $name, locality: $locality, region: $region, regionCode: $regionCode, country: $country, countryCode: $countryCode}';
+    return 'AddressInfo{city: $city, postCode: $postCode, country: $country, countryCode: $countryCode}';
   }
 }

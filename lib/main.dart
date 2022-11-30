@@ -30,9 +30,8 @@ class WeatherApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (ctx) => LocationRepository(
-            positionStackApi: PositionStackApi(
-              url: _env.positionStackApiURL,
-              key: _env.positionStackApiKey,
+            reverseLocationApi: ReverseLocationApi(
+              url: _env.openStreetMapApiURL,
             ),
           ),
         ),

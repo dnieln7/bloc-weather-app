@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
       child: orientation == Orientation.portrait
           ? Column(
               children: [
-                WeatherLocation(city: state.location.locality),
+                WeatherLocation(city: state.location.city),
                 const SizedBox(height: 20),
                 Expanded(
                   child: WeatherSummary(
@@ -123,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                     Flexible(
                       flex: 50,
                       fit: FlexFit.tight,
-                      child: WeatherLocation(city: state.location.locality),
+                      child: WeatherLocation(city: state.location.city),
                     ),
                     Flexible(
                       flex: 50,

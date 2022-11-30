@@ -2,9 +2,9 @@ class UserLocation {
   final double latitude;
   final double longitude;
   final String name;
-  final String locality;
-  final String region;
-  final String regionCode;
+  final String summarized;
+  final String city;
+  final String postCode;
   final String country;
   final String countryCode;
 
@@ -12,9 +12,9 @@ class UserLocation {
     required this.latitude,
     required this.longitude,
     required this.name,
-    required this.locality,
-    required this.region,
-    required this.regionCode,
+    required this.summarized,
+    required this.city,
+    required this.postCode,
     required this.country,
     required this.countryCode,
   });

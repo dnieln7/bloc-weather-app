@@ -6,24 +6,25 @@ import 'package:weather_app/data/server/request/requests.dart';
 import 'package:weather_app/data/server/response/responses.dart';
 import 'dart:developer' as logger;
 
-class PositionStackApi {
+class ReverseLocationApi {
   final String _url;
-  final String _key;
   final http.Client _client;
 
-  PositionStackApi({required String url, required String key})
+  ReverseLocationApi({required String url})
       : _url = url,
-        _key = key,
         _client = http.Client();
 
   Future<GetReverseLocationResponse> getReverseLocation(
-      GetReverseLocationRequest request) async {
-    final uri = Uri.http(
+    GetReverseLocationRequest request,
+  ) async {
+    final uri = Uri.https(
       _url,
-      '/v1/reverse',
+      '/reverse',
       {
-        'access_key': _key,
-        'query': '${request.latitude},${request.longitude}',
+        'lat': '${request.latitude}',
+        'lon': '${request.longitude}',
+        'zoom': '10',
+        'format': 'jsonv2',
       },
     );
 
@@ -42,21 +43,17 @@ class PositionStackApi {
       final decoded = jsonDecode(response.body) as Map<String, dynamic>;
       parsed = GetReverseLocationResponse.fromMap(decoded);
     } catch (e) {
-      logger.log('Position stack api internal error');
+      logger.log('Api internal error');
 
-      parsed = GetReverseLocationResponse(
-        data: [
-          ReverseLocationData(
-            latitude: request.latitude,
-            longitude: request.longitude,
-            name: 'N/A',
-            locality: 'N/A',
-            region: 'N/A',
-            regionCode: 'N/A',
-            country: 'N/A',
-            countryCode: 'N/A',
-          )
-        ],
+      parsed = const GetReverseLocationResponse(
+        name: 'N/A',
+        displayName: 'N/A',
+        addressInfo: AddressInfo(
+          city: 'N/A',
+          postCode: 'N/A',
+          country: 'N/A',
+          countryCode: 'N/A',
+        ),
       );
     }
 

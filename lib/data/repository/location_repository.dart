@@ -9,11 +9,11 @@ abstract class ILocationRepository {
 
 class LocationRepository implements ILocationRepository {
   final LocationService _locationService;
-  final PositionStackApi _positionStackApi;
+  final ReverseLocationApi _reverseLocationApi;
 
-  LocationRepository({required PositionStackApi positionStackApi})
+  LocationRepository({required ReverseLocationApi reverseLocationApi})
       : _locationService = LocationService(),
-        _positionStackApi = positionStackApi;
+        _reverseLocationApi = reverseLocationApi;
 
   Stream<bool> get isServiceReady {
     return _locationService.ready;
@@ -30,24 +30,22 @@ class LocationRepository implements ILocationRepository {
   @override
   Future<UserLocation> getLocation() async {
     final data = await _locationService.currentLocation;
-    final response = await _positionStackApi.getReverseLocation(
+    final response = await _reverseLocationApi.getReverseLocation(
       GetReverseLocationRequest(
         latitude: data.latitude!,
         longitude: data.longitude!,
       ),
     );
 
-    final location = response.data.first;
-
     return UserLocation(
-      latitude: location.latitude,
-      longitude: location.longitude,
-      name: location.name,
-      locality: location.locality,
-      region: location.region,
-      regionCode: location.regionCode,
-      country: location.country,
-      countryCode: location.countryCode,
+      latitude: data.latitude!,
+      longitude: data.longitude!,
+      name: response.name,
+      summarized: response.displayName,
+      city: response.addressInfo.city,
+      postCode: response.addressInfo.postCode,
+      country: response.addressInfo.country,
+      countryCode: response.addressInfo.countryCode,
     );
   }
 
