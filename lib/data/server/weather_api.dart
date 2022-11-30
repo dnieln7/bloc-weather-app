@@ -33,8 +33,7 @@ class WeatherApi {
     );
 
     final response = await _client.get(uri, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'Accept': '*/*',
     });
 
     if (response.statusCode != 200) {
