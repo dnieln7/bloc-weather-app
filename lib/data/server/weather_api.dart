@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:weather_app/data/server/exception/exceptions.dart';
-import 'package:weather_app/data/server/request/requests.dart';
-import 'package:weather_app/data/server/response/responses.dart';
+import 'package:weather_app/data/server/server.dart';
 
 class WeatherApi {
   final String _url;

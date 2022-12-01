@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:weather_app/config/env.dart';
 import 'package:weather_app/data/preferences/preferences.dart';
 import 'package:weather_app/data/repository/repositories.dart';
-import 'package:weather_app/data/server/servers.dart';
+import 'package:weather_app/data/server/server.dart';
 import 'package:weather_app/state/weather/weather_cubit.dart';
 import 'package:weather_app/ui/app_router.dart';
 import 'package:weather_app/ui/screens/screens.dart';

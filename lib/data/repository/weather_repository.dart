@@ -1,6 +1,5 @@
-import 'package:weather_app/data/server/request/requests.dart';
-import 'package:weather_app/data/server/weather_api.dart';
 import 'package:weather_app/data/preferences/preferences.dart';
+import 'package:weather_app/data/server/server.dart';
 import 'package:weather_app/domain/enum/enums.dart';
 import 'package:weather_app/domain/model/models.dart';
 

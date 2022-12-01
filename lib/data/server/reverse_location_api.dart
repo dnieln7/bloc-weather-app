@@ -1,10 +1,8 @@
 import 'dart:convert';
+import 'dart:developer' as logger;
 
 import 'package:http/http.dart' as http;
-import 'package:weather_app/data/server/exception/exceptions.dart';
-import 'package:weather_app/data/server/request/requests.dart';
-import 'package:weather_app/data/server/response/responses.dart';
-import 'dart:developer' as logger;
+import 'package:weather_app/data/server/server.dart';
 
 class ReverseLocationApi {
   final String _url;

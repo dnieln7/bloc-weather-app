@@ -1,5 +1,4 @@
-import 'package:weather_app/data/server/request/requests.dart';
-import 'package:weather_app/data/server/servers.dart';
+import 'package:weather_app/data/server/server.dart';
 import 'package:weather_app/domain/model/models.dart';
 import 'package:weather_app/service/services.dart';
 
